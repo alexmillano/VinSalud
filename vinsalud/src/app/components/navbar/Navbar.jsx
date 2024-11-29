@@ -19,9 +19,9 @@ export default function Navbar(){
             <div className="flex items-center">
                 <div className="flex-shrink-0">
                 <img
-                    src="/logo.png" // Ruta a tu logo en la carpeta public
+                    src="/logo.png" 
                     alt="Logo Vinsalud"
-                    className="h-40 w-auto" // Ajusta el tamaño según necesites
+                    className="h-40 w-auto" 
                   />
                 </div>
             </div>

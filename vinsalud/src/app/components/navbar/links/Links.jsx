@@ -17,7 +17,6 @@ export default function Links() {
 
       return (
         <div className="flex items-center space-x-4">
-          {/* Rutas de navegación */}
           {routes.map((route) => (
             <Link
               key={route.name}
@@ -27,11 +26,9 @@ export default function Links() {
               {route.name}
             </Link>
           ))}
-    
-          {/* Botón de Logout solo si el usuario está logueado */}
           {isLoggedIn && (
             <button
-              onClick={logout}  // Llama a la función logout cuando se hace clic
+              onClick={logout}  
               className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300"
             >
               Logout

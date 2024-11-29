@@ -12,16 +12,20 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (email === "admin@example.com" && password === "password123") {
-      login(); 
-      console.log(isLoggedIn);
-      router.push("/"); 
-    } else {
+  
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+  
+    const respuesta = await login(email.value, password.value); 
+  
+    if (!respuesta) {
       setError("Credenciales incorrectas. Inténtalo de nuevo.");
-    }
+      return; 
+    } 
+  
+    router.push("/");
   };
 
   return (
