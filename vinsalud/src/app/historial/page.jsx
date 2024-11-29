@@ -1,10 +1,21 @@
-"use client"; 
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 const Historial = () => {
-  const [nota, setNota] = useState('');
-  const [notasGuardadas, setNotasGuardadas] = useState([]);
+  const [pacientes, setPacientes] = useState([
+    { id: 1, nombre: "Juan Pérez", historial: [] },
+    { id: 2, nombre: "Ana López", historial: [] },
+    { id: 3, nombre: "Carlos Ramírez", historial: [] },
+  ]);
+  const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);
+  const [nota, setNota] = useState("");
+
+  // Seleccionar un paciente
+  const seleccionarPaciente = (id) => {
+    const paciente = pacientes.find((p) => p.id === id);
+    setPacienteSeleccionado(paciente);
+  };
 
   // Manejar el cambio en el textarea
   const handleChange = (e) => {
@@ -14,37 +25,89 @@ const Historial = () => {
   // Manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (nota.trim()) {
-      setNotasGuardadas([...notasGuardadas, nota]);  // Agregar la nueva nota al historial
-      setNota('');  // Limpiar el campo del formulario
-      alert(`Nota guardada: ${nota}`);
+    if (nota.trim() && pacienteSeleccionado) {
+      const nuevaNota = nota.trim();
+      const pacientesActualizados = pacientes.map((p) =>
+        p.id === pacienteSeleccionado.id
+          ? { ...p, historial: [...p.historial, nuevaNota] }
+          : p
+      );
+      setPacientes(pacientesActualizados);
+      setPacienteSeleccionado({
+        ...pacienteSeleccionado,
+        historial: [...pacienteSeleccionado.historial, nuevaNota],
+      });
+      setNota("");
+      alert(`Nota guardada para ${pacienteSeleccionado.nombre}: "${nuevaNota}"`);
     } else {
-      alert('Por favor, ingrese una nota.');
+      alert("Por favor, seleccione un paciente y escriba una nota.");
     }
   };
 
   return (
-    <div>
-      <h2>Historial Médico</h2>
-      <p>Aquí puedes consultar y añadir notas al historial de los pacientes.</p>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="nota">Añadir Nota:</label>
-        <textarea
-          id="nota"
-          rows="4"
-          cols="50"
-          value={nota}
-          onChange={handleChange}
-        ></textarea>
-        <button type="submit">Guardar Nota</button>
-      </form>
-      
-      <h3>Notas Guardadas</h3>
-      <ul>
-        {notasGuardadas.map((nota, index) => (
-          <li key={index}>{nota}</li>
-        ))}
-      </ul>
+    <div className="max-w-4xl mx-auto mt-8 px-4">
+      <h2 className="text-2xl font-bold mb-6 text-center">Historial Médico</h2>
+
+      {/* Seleccionar paciente */}
+      <div className="mb-6">
+        <h3 className="text-xl font-semibold mb-4">Seleccionar Paciente</h3>
+        <ul className="space-y-2">
+          {pacientes.map((paciente) => (
+            <li key={paciente.id}>
+              <button
+                onClick={() => seleccionarPaciente(paciente.id)}
+                className={`px-4 py-2 rounded-md ${
+                  pacienteSeleccionado?.id === paciente.id
+                    ? "bg-green-600 text-white"
+                    : "bg-blue-600 text-white hover:bg-blue-700"
+                }`}
+              >
+                {paciente.nombre}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Área de notas */}
+      {pacienteSeleccionado && (
+        <div className="mb-6">
+          <h3 className="text-xl font-semibold mb-4">
+            Historial de {pacienteSeleccionado.nombre}
+          </h3>
+
+          <form onSubmit={handleSubmit} className="mb-4">
+            <label htmlFor="nota" className="block mb-2 font-medium">
+              Añadir Nota:
+            </label>
+            <textarea
+              id="nota"
+              rows="4"
+              value={nota}
+              onChange={handleChange}
+              className="w-full p-2 border rounded-md"
+            ></textarea>
+            <button
+              type="submit"
+              className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+            >
+              Guardar Nota
+            </button>
+          </form>
+
+          {/* Mostrar notas guardadas */}
+          <h4 className="text-lg font-semibold mb-2">Notas Guardadas:</h4>
+          {pacienteSeleccionado.historial.length > 0 ? (
+            <ul className="list-disc list-inside space-y-1">
+              {pacienteSeleccionado.historial.map((nota, index) => (
+                <li key={index}>{nota}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-600">No hay notas guardadas.</p>
+          )}
+        </div>
+      )}
     </div>
   );
 };
