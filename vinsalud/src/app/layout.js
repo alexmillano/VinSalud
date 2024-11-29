@@ -31,9 +31,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <AuthProvider>
-      <html lang="en" className="dark"> {/* Establecer clase dark aquí */}
+      <html lang="en" className="dark"> 
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <div className="min-h-screen bg-gray-200 dark:bg-gray-800"> {/* fondo para dark mode */}
+          <div className="min-h-screen bg-gray-200 dark:bg-gray-800"> 
             <Navbar />
             {children}
           </div>
