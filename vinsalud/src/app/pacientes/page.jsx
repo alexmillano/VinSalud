@@ -1,19 +1,30 @@
-"use client"; 
-
-import { useState } from 'react';
+"use client";
+import { useState } from "react";
 
 const Pacientes = () => {
   // Estado de los pacientes
   const [pacientes, setPacientes] = useState([
-    { id: 1, nombre: "Juan Pérez", edad: 30, telefono: "123456789", correo: "juan@example.com" },
-    { id: 2, nombre: "María López", edad: 25, telefono: "987654321", correo: "maria@example.com" },
+    {
+      id: 1,
+      nombre: "Juan Pérez",
+      edad: 30,
+      telefono: "123456789",
+      correo: "juan@example.com",
+    },
+    {
+      id: 2,
+      nombre: "María López",
+      edad: 25,
+      telefono: "987654321",
+      correo: "maria@example.com",
+    },
   ]);
 
   // Estado para el formulario
-  const [nombre, setNombre] = useState('');
-  const [edad, setEdad] = useState('');
-  const [telefono, setTelefono] = useState('');
-  const [correo, setCorreo] = useState('');
+  const [nombre, setNombre] = useState("");
+  const [edad, setEdad] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [correo, setCorreo] = useState("");
 
   // Función para manejar el envío del formulario
   const handleSubmit = (e) => {
@@ -29,15 +40,17 @@ const Pacientes = () => {
     // Actualizar lista de pacientes
     setPacientes([...pacientes, nuevoPaciente]);
     alert(`Paciente ${nombre} registrado con éxito.`);
-    setNombre('');
-    setEdad('');
-    setTelefono('');
-    setCorreo('');
+    setNombre("");
+    setEdad("");
+    setTelefono("");
+    setCorreo("");
   };
 
   // Función para eliminar un paciente
   const eliminarPaciente = (id) => {
-    const pacientesActualizados = pacientes.filter((paciente) => paciente.id !== id);
+    const pacientesActualizados = pacientes.filter(
+      (paciente) => paciente.id !== id
+    );
     setPacientes(pacientesActualizados);
     alert("Paciente eliminado con éxito.");
   };
@@ -113,8 +126,12 @@ const Pacientes = () => {
               <td>{paciente.telefono}</td>
               <td>{paciente.correo}</td>
               <td>
-                <button onClick={() => editarPaciente(paciente.id)}>Editar</button>
-                <button onClick={() => eliminarPaciente(paciente.id)}>Eliminar</button>
+                <button onClick={() => editarPaciente(paciente.id)}>
+                  Editar
+                </button>
+                <button onClick={() => eliminarPaciente(paciente.id)}>
+                  Eliminar
+                </button>
               </td>
             </tr>
           ))}

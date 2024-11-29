@@ -1,9 +1,9 @@
-"use client"; 
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 const Historial = () => {
-  const [nota, setNota] = useState('');
+  const [nota, setNota] = useState("");
   const [notasGuardadas, setNotasGuardadas] = useState([]);
 
   // Manejar el cambio en el textarea
@@ -15,11 +15,11 @@ const Historial = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (nota.trim()) {
-      setNotasGuardadas([...notasGuardadas, nota]);  // Agregar la nueva nota al historial
-      setNota('');  // Limpiar el campo del formulario
+      setNotasGuardadas([...notasGuardadas, nota]); // Agregar la nueva nota al historial
+      setNota(""); // Limpiar el campo del formulario
       alert(`Nota guardada: ${nota}`);
     } else {
-      alert('Por favor, ingrese una nota.');
+      alert("Por favor, ingrese una nota.");
     }
   };
 
@@ -38,7 +38,7 @@ const Historial = () => {
         ></textarea>
         <button type="submit">Guardar Nota</button>
       </form>
-      
+
       <h3>Notas Guardadas</h3>
       <ul>
         {notasGuardadas.map((nota, index) => (

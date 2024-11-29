@@ -1,19 +1,37 @@
-"use client"; 
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 const Turnos = () => {
   // Estado de los turnos
   const [turnos, setTurnos] = useState([
-    { id: 1, paciente: "Juan Pérez", fecha: "2024-11-28", hora: "10:00 AM", estado: "Pendiente" },
-    { id: 2, paciente: "María López", fecha: "2024-11-28", hora: "11:00 AM", estado: "Pendiente" },
-    { id: 3, paciente: "Carlos Ramírez", fecha: "2024-11-28", hora: "12:00 PM", estado: "Pendiente" },
+    {
+      id: 1,
+      paciente: "Juan Pérez",
+      fecha: "2024-11-28",
+      hora: "10:00 AM",
+      estado: "Pendiente",
+    },
+    {
+      id: 2,
+      paciente: "María López",
+      fecha: "2024-11-28",
+      hora: "11:00 AM",
+      estado: "Pendiente",
+    },
+    {
+      id: 3,
+      paciente: "Carlos Ramírez",
+      fecha: "2024-11-28",
+      hora: "12:00 PM",
+      estado: "Pendiente",
+    },
   ]);
 
   // Estado para el formulario
-  const [paciente, setPaciente] = useState('');
-  const [fecha, setFecha] = useState('');
-  const [hora, setHora] = useState('');
+  const [paciente, setPaciente] = useState("");
+  const [fecha, setFecha] = useState("");
+  const [hora, setHora] = useState("");
 
   // Función para manejar el envío del formulario
   const handleSubmit = (e) => {
@@ -29,9 +47,9 @@ const Turnos = () => {
     // Actualizar la lista de turnos
     setTurnos([...turnos, nuevoTurno]);
     alert(`Turno para ${paciente} agendado con éxito.`);
-    setPaciente('');
-    setFecha('');
-    setHora('');
+    setPaciente("");
+    setFecha("");
+    setHora("");
   };
 
   // Función para eliminar un turno
@@ -99,7 +117,9 @@ const Turnos = () => {
               <td>{turno.hora}</td>
               <td>
                 <button onClick={() => editarTurno(turno.id)}>Editar</button>
-                <button onClick={() => eliminarTurno(turno.id)}>Eliminar</button>
+                <button onClick={() => eliminarTurno(turno.id)}>
+                  Eliminar
+                </button>
               </td>
             </tr>
           ))}
