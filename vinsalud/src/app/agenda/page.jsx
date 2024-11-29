@@ -1,26 +1,42 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useAuth } from "../context/AuthContext";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext"; // Asegúrate de tener un contexto para manejar el rol del usuario
 
 const Agenda = () => {
-  const { role } = useAuth();
+  const { role } = useAuth(); // Obtener el rol desde el contexto
   const router = useRouter();
 
+  // Inicializar estado para mostrar la agenda
+  const [turnos, setTurnos] = useState([
+    { id: 1, paciente: "Juan Pérez", hora: "09:00 AM", estado: "Pendiente" },
+    { id: 2, paciente: "Ana López", hora: "10:00 AM", estado: "Pendiente" },
+  ]);
+
+  // Estado de carga para esperar el rol
+  const [loading, setLoading] = useState(true);
+
+  // useEffect para manejar la redirección si el rol no es "medico"
   useEffect(() => {
-    if (role !== "medico") {
-      // Redirige a "/" después de 4 segundos si el rol no es "medico"
-      const timer = setTimeout(() => {
-        router.push("/");
-      }, 4000);
-
-      // Limpia el temporizador si el componente se desmonta
-      return () => clearTimeout(timer);
+    if (role === undefined) {
+      return; // No hacer nada si role aún no está definido
     }
-  }, [role, router]);
+    setLoading(false); // Una vez definido el rol, dejamos de mostrar el estado de carga
+    if (role !== "medico") {
+      const timer = setTimeout(() => {
+        router.push("/"); // Redirigir después de 4 segundos
+      }, 4000);
+      return () => clearTimeout(timer); // Limpiar el temporizador al desmontar
+    }
+  }, [role, router]); // Dependencias del useEffect
 
-  // Si el rol no es "medico", muestra solo el mensaje
+  // Mostrar un mensaje de carga mientras se obtiene el rol
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  // Mostrar mensaje si el rol no es "medico"
   if (role !== "medico") {
     return (
       <div className="flex items-center justify-center h-screen bg-bordo">
@@ -30,12 +46,6 @@ const Agenda = () => {
       </div>
     );
   }
-
-  // Si el rol es "medico", muestra la tabla de turnos
-  const [turnos, setTurnos] = useState([
-    { id: 1, paciente: "Juan Pérez", hora: "09:00 AM", estado: "Pendiente" },
-    { id: 2, paciente: "Ana López", hora: "10:00 AM", estado: "Pendiente" },
-  ]);
 
   const marcarAsistencia = (id) => {
     setTurnos(
@@ -56,7 +66,7 @@ const Agenda = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#1e3a8a] flex justify-center items-start pt-8"> {/* Ajustar posición con pt-8 */}
+    <div className="min-h-screen bg-[#1e3a8a] flex justify-center items-start pt-8">
       <div className="max-w-4xl mx-auto w-full px-4">
         <h2 className="text-2xl font-bold mb-6 text-center text-white">Agenda del Día</h2>
         <div className="overflow-x-auto">
@@ -121,3 +131,5 @@ const Agenda = () => {
 };
 
 export default Agenda;
+
+
