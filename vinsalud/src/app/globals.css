@@ -1,5 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "flowbite/dist/flowbite.min.css";
 
+.carousel-item img {
+  object-fit: contain;
+}
 
+html, body{
+  color: #1D2A44;
+  background: #1D2A44;
+}
+    
+main{
+  background: #1D2A44;
+  height: 100vh;
+  height: 100dvh;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
