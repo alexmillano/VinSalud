@@ -8,6 +8,7 @@ import LinksBurger from "./links/LinksBurger";
 export default function Navbar(){
 
     const [isClick,setIsclick]=useState(false);
+    
 
     const toggleNavbar= () => {
         setIsclick(!isClick)
@@ -18,11 +19,13 @@ export default function Navbar(){
             <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
                 <div className="flex-shrink-0">
+                <Link href="/">                
                 <img
                     src="/logo.png" 
                     alt="Logo Vinsalud"
                     className="h-40 w-auto" 
                   />
+                </Link>
                 </div>
             </div>
             <div className="hidden md:block">

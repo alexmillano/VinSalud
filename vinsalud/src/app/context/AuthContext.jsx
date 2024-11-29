@@ -31,6 +31,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setIsLoggedIn(false);
     setRole("");
+        
   };
 
   return (
