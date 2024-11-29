@@ -3,12 +3,25 @@ import { useAuth } from "@/app/context/AuthContext";
 import Link from "next/link";
 
 export default function Links() {
-  const { isLoggedIn, logout } = useAuth();
+    const { isLoggedIn, logout, role } = useAuth();
 
-  const routes = isLoggedIn
+    const routes = isLoggedIn
     ? [
         { path: "/", name: "Inicio" },
-        { path: "/Contacto", name: "Contacto" },
+        ...(role === "medico"
+          ? [
+              { path: "/pacientes", name: "Pacientes" },
+              { path: "/turnos", name: "Turnos" },
+              { path: "/historial", name: "Historial" },
+              { path: "/agenda", name: "Agenda" },
+            ]
+          : []), 
+        ...(role === "paciente"
+          ? [
+              { path: "/contacto", name: "Contacto" },  
+              { path: "/proximo-turno", name: "Próximo Turno" }, 
+            ]
+          : []), 
       ]
     : [
         { path: "/", name: "Inicio" },
@@ -31,7 +44,7 @@ export default function Links() {
               onClick={logout}  
               className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300"
             >
-              Logout
+              Deslogearse
             </button>
           )}
         </div>

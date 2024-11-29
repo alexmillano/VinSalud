@@ -10,6 +10,9 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        bordo: '#1D2A44', 
+        otroColor: 'rgb(128, 0, 32)', 
+        otroColorHSL: 'hsl(350, 100%, 25%)',
       },
     },
   },

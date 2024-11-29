@@ -29,7 +29,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-900">
+    <div className="flex items-center justify-center h-screen bg-bordo">
       <div className="bg-white shadow-md rounded-lg p-8 max-w-sm w-full">
         <h1 className="text-2xl font-bold mb-6 text-center">Iniciar Sesión</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
