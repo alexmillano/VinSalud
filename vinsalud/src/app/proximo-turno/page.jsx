@@ -19,32 +19,33 @@ export default function ProximosTurnosPage() {
   ]);
 
   return (
-    <div className="max-w-4xl mx-auto mt-8 px-4">
-      <h2 className="text-2xl font-bold mb-6 text-center">Próximos Turnos</h2>
-      
-      {/* Si hay turnos programados, los mostramos */}
-      {turnos.length > 0 ? (
-        <div className="space-y-4">
-          {turnos.map((turno) => (
-            <div
-              key={turno.id}
-              className="bg-white shadow-md rounded-lg p-4 border border-gray-300"
-            >
-              <p className="text-lg font-medium">
-                <strong>Fecha:</strong> {turno.fecha}
-              </p>
-              <p className="text-lg font-medium">
-                <strong>Hora:</strong> {turno.hora}
-              </p>
-              <p className="text-lg font-medium">
-                <strong>Doctor:</strong> {turno.doctor}
-              </p>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p className="text-center text-gray-600">No tienes próximos turnos.</p>
-      )}
+    <div className="flex items-start justify-start h-screen bg-[#1e3a8a]"> {/* Fondo azul específico del Login */}
+      <div className="max-w-4xl mx-auto mt-8 px-4 w-full">
+        <h2 className="text-3xl font-bold mb-6 text-left text-white">Próximos Turnos</h2>
+
+        {turnos.length > 0 ? (
+          <div className="space-y-6">
+            {turnos.map((turno) => (
+              <div
+                key={turno.id}
+                className="bg-white shadow-lg rounded-lg p-6 border border-gray-300 w-full"
+              >
+                <p className="text-xl font-medium text-left">
+                  <strong>Fecha:</strong> {turno.fecha}
+                </p>
+                <p className="text-xl font-medium text-left">
+                  <strong>Hora:</strong> {turno.hora}
+                </p>
+                <p className="text-xl font-medium text-left">
+                  <strong>Doctor:</strong> {turno.doctor}
+                </p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-left text-gray-600">No tienes próximos turnos.</p>
+        )}
+      </div>
     </div>
   );
 }
