@@ -24,16 +24,19 @@ export default function Footer() {
               <h2 className="mb-6 text-sm font-semibold uppercase text-white">
                 Recursos usados
               </h2>
-              <ul className=" text-gray-500 font-medium">
+              <ul className="text-white font-medium">
                 <li className="mb-4">
-                  <a href="https://flowbite.com/" className="hover:underline">
+                  <a
+                    href="https://flowbite.com/"
+                    className="text-white hover:underline"
+                  >
                     Flowbite
                   </a>
                 </li>
                 <li>
                   <a
                     href="https://tailwindcss.com/"
-                    className="hover:underline"
+                    className="text-white hover:underline"
                   >
                     Tailwind CSS
                   </a>
@@ -41,22 +44,32 @@ export default function Footer() {
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold  uppercase text-white">
+              <h2 className="mb-6 text-sm font-semibold uppercase text-white">
                 Navegacion
               </h2>
-              <ul className="text-gray-500  font-medium">
+              <ul className="text-white font-medium">
                 <li className="mb-4">
-                  <Link href="/" className="hover:underline">
+                  <Link
+                    href="/"
+                    className="text-white hover:underline"
+                  >
                     Home
                   </Link>
                 </li>
                 <li className="mb-4">
                   {isLoggedIn ? (
-                    <Link href="/" onClick={logout} className="hover:underline">
+                    <Link
+                      href="/"
+                      onClick={logout}
+                      className="text-white hover:underline"
+                    >
                       Deslogearse
                     </Link>
                   ) : (
-                    <Link href="/Login" className="hover:underline">
+                    <Link
+                      href="/Login"
+                      className="text-white hover:underline"
+                    >
                       Logearse
                     </Link>
                   )}
@@ -67,9 +80,9 @@ export default function Footer() {
         </div>
         <hr className="my-6 sm:mx-auto border-gray-700 lg:my-8" />
         <div className="sm:flex sm:items-center sm:justify-between">
-          <span className="text-sm  sm:text-center text-gray-400">
+          <span className="text-sm sm:text-center text-gray-400">
             © 2023{" "}
-            <a href="/" className="hover:underline">
+            <a href="/" className="text-white hover:underline">
               VinSalud
             </a>
             . All Rights Reserved.
@@ -77,7 +90,7 @@ export default function Footer() {
           <div className="flex mt-4 sm:justify-center sm:mt-0">
             <a
               href="#"
-              className="text-gray-500  hover:text-white"
+              className="text-white hover:text-white"
             >
               <svg
                 className="w-6 h-6"
@@ -96,7 +109,7 @@ export default function Footer() {
             </a>
             <a
               href="#"
-              className="text-gray-500 hover:text-white ms-5"
+              className="text-white hover:text-white ms-5"
             >
               <svg
                 className="w-6 h-6"
@@ -111,7 +124,7 @@ export default function Footer() {
             </a>
             <a
               href="#"
-              className="text-gray-500  hover:text-white ms-5"
+              className="text-white hover:text-white ms-5"
             >
               <svg
                 className="w-6 h-6"
@@ -122,7 +135,7 @@ export default function Footer() {
               >
                 <path
                   fillRule="evenodd"
-                  d="M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.29 16c7.552 0 11.688-6.249 11.688-11.688 0-.178 0-.353-.014-.527A8.14 8.14 0 0 0 20 1.892Z"
+                  d="M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.83a11.705 11.705 0 0 0 6.396 1.87c7.705 0 11.925-6.677 11.925-12.463 0-.187-.005-.374-.014-.56A8.4 8.4 0 0 0 20 1.892Z"
                   clipRule="evenodd"
                 />
               </svg>
