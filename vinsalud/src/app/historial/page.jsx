@@ -11,18 +11,15 @@ const Historial = () => {
   const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);
   const [nota, setNota] = useState("");
 
-  // Seleccionar un paciente
   const seleccionarPaciente = (id) => {
     const paciente = pacientes.find((p) => p.id === id);
     setPacienteSeleccionado(paciente);
   };
 
-  // Manejar el cambio en el textarea
   const handleChange = (e) => {
     setNota(e.target.value);
   };
 
-  // Manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
     if (nota.trim() && pacienteSeleccionado) {
