@@ -32,7 +32,7 @@ export default function ContactoPage() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-[#1e3a8a]"> {/* Fondo azul */}
-      <div className="max-w-xl mx-auto mt-12 px-4 w-full"> {/* Reducir el tamaño del formulario */}
+      <div className="max-w-xl mx-auto mt-12 px-4 w-full mb-12"> {/* Añadir margin-bottom */}
         <h2 className="text-2xl font-bold mb-6 text-center text-white">Si tienes alguna duda, por favor comunicate con nosotros</h2>
 
         {/* Si el formulario fue enviado, mostramos el mensaje de confirmación */}

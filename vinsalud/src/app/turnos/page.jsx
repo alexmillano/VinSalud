@@ -59,8 +59,9 @@ const Turnos = () => {
   };
 
   return (
-    <div className="flex items-start justify-center bg-[#1e3a8a] pt-8"> {/* Fondo azul con alineación ajustada */}
-      <div className="max-w-4xl mx-auto mt-8 px-4 w-full">
+    <div className="flex items-start justify-center bg-[#1e3a8a] pt-8">
+      {/* Fondo azul con alineación ajustada */}
+      <div className="max-w-4xl mx-auto mt-8 px-4 w-full mb-12"> {/* Añadido margen inferior */}
         <h2 className="text-2xl font-bold mb-6 text-center text-white">Gestión de Turnos</h2>
         <form
           onSubmit={handleSubmit}
