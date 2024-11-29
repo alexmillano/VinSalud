@@ -9,7 +9,6 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      
       const response = await fetch("/api/users");
       const users = await response.json();
       const user = users.find(
@@ -18,13 +17,13 @@ export const AuthProvider = ({ children }) => {
       if (user) {
         setIsLoggedIn(true);
         setRole(user.role);
-        return true; 
+        return true;
       } else {
-        return false; 
+        return false;
       }
     } catch (error) {
       console.error("Error al verificar las credenciales", error);
-      return false; 
+      return false;
     }
   };
 

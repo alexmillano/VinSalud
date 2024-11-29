@@ -1,30 +1,30 @@
-"use client"; 
+"use client";
 
-import { useAuth } from "../context/AuthContext"; 
-import { useRouter } from "next/navigation"; 
+import { useAuth } from "../context/AuthContext";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import React from "react";
 
 const LoginPage = () => {
-  const { login , isLoggedIn } = useAuth(); 
-  const router = useRouter(); 
+  const { login, isLoggedIn } = useAuth();
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const email = document.getElementById("email");
     const password = document.getElementById("password");
-  
-    const respuesta = await login(email.value, password.value); 
-  
+
+    const respuesta = await login(email.value, password.value);
+
     if (!respuesta) {
       setError("Credenciales incorrectas. Inténtalo de nuevo.");
-      return; 
-    } 
-  
+      return;
+    }
+
     router.push("/");
   };
 
@@ -34,7 +34,10 @@ const LoginPage = () => {
         <h1 className="text-2xl font-bold mb-6 text-center">Iniciar Sesión</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
               Correo Electrónico
             </label>
             <input
@@ -48,7 +51,10 @@ const LoginPage = () => {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               Contraseña
             </label>
             <input

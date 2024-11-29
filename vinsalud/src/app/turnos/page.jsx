@@ -4,9 +4,27 @@ import { useState } from "react";
 
 const Turnos = () => {
   const [turnos, setTurnos] = useState([
-    { id: 1, paciente: "Juan Pérez", fecha: "2024-11-28", hora: "10:00 AM", estado: "Pendiente" },
-    { id: 2, paciente: "María López", fecha: "2024-11-28", hora: "11:00 AM", estado: "Pendiente" },
-    { id: 3, paciente: "Carlos Ramírez", fecha: "2024-11-28", hora: "12:00 PM", estado: "Pendiente" },
+    {
+      id: 1,
+      paciente: "Juan Pérez",
+      fecha: "2024-11-28",
+      hora: "10:00 AM",
+      estado: "Pendiente",
+    },
+    {
+      id: 2,
+      paciente: "María López",
+      fecha: "2024-11-28",
+      hora: "11:00 AM",
+      estado: "Pendiente",
+    },
+    {
+      id: 3,
+      paciente: "Carlos Ramírez",
+      fecha: "2024-11-28",
+      hora: "12:00 PM",
+      estado: "Pendiente",
+    },
   ]);
 
   const [paciente, setPaciente] = useState("");

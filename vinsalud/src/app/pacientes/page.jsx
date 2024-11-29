@@ -1,11 +1,22 @@
 "use client";
-
 import { useState } from "react";
 
 const Pacientes = () => {
   const [pacientes, setPacientes] = useState([
-    { id: 1, nombre: "Juan Pérez", edad: 30, telefono: "123456789", correo: "juan@example.com" },
-    { id: 2, nombre: "María López", edad: 25, telefono: "987654321", correo: "maria@example.com" },
+    {
+      id: 1,
+      nombre: "Juan Pérez",
+      edad: 30,
+      telefono: "123456789",
+      correo: "juan@example.com",
+    },
+    {
+      id: 2,
+      nombre: "María López",
+      edad: 25,
+      telefono: "987654321",
+      correo: "maria@example.com",
+    },
   ]);
 
   const [nombre, setNombre] = useState("");
@@ -45,7 +56,9 @@ const Pacientes = () => {
   };
 
   const eliminarPaciente = (id) => {
-    const pacientesActualizados = pacientes.filter((paciente) => paciente.id !== id);
+    const pacientesActualizados = pacientes.filter(
+      (paciente) => paciente.id !== id
+    );
     setPacientes(pacientesActualizados);
     alert("Paciente eliminado con éxito.");
   };
