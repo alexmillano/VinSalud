@@ -1,30 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext"; // Asegúrate de tener un contexto para manejar el rol del usuario
 
 const Turnos = () => {
+  const { role } = useAuth();
+  const router = useRouter();
+
+  // Redirección si el rol no es "medico"
+  useEffect(() => {
+    if (role !== "medico") {
+      const timer = setTimeout(() => {
+        router.push("/");
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [role, router]);
+
+  // Mostrar mensaje de redirección si el rol no es "medico"
+  if (role !== "medico") {
+    return (
+      <div className="flex items-center justify-center h-screen bg-bordo">
+        <p className="text-center text-5xl font-bold text-red-600">
+          No tienes permiso para acceder a esta página. Redirigiendo...
+        </p>
+      </div>
+    );
+  }
+
+  // Lógica principal del componente
   const [turnos, setTurnos] = useState([
-    {
-      id: 1,
-      paciente: "Juan Pérez",
-      fecha: "2024-11-28",
-      hora: "10:00 AM",
-      estado: "Pendiente",
-    },
-    {
-      id: 2,
-      paciente: "María López",
-      fecha: "2024-11-28",
-      hora: "11:00 AM",
-      estado: "Pendiente",
-    },
-    {
-      id: 3,
-      paciente: "Carlos Ramírez",
-      fecha: "2024-11-28",
-      hora: "12:00 PM",
-      estado: "Pendiente",
-    },
+    { id: 1, paciente: "Juan Pérez", fecha: "2024-11-28", hora: "10:00 AM", estado: "Pendiente" },
+    { id: 2, paciente: "María López", fecha: "2024-11-28", hora: "11:00 AM", estado: "Pendiente" },
+    { id: 3, paciente: "Carlos Ramírez", fecha: "2024-11-28", hora: "12:00 PM", estado: "Pendiente" },
   ]);
 
   const [paciente, setPaciente] = useState("");

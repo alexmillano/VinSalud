@@ -1,8 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAuth } from "../context/AuthContext";
+import { useRouter } from "next/navigation";
 
 const Agenda = () => {
+  const { role } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (role !== "medico") {
+      // Redirige a "/" después de 4 segundos si el rol no es "medico"
+      const timer = setTimeout(() => {
+        router.push("/");
+      }, 4000);
+
+      // Limpia el temporizador si el componente se desmonta
+      return () => clearTimeout(timer);
+    }
+  }, [role, router]);
+
+  // Si el rol no es "medico", muestra solo el mensaje
+  if (role !== "medico") {
+    return (
+      <div className="flex items-center justify-center h-screen bg-bordo">
+        <p className="text-center text-5xl font-bold text-red-600">
+          No tienes permiso para acceder a esta página. Redirigiendo...
+        </p>
+      </div>
+    );
+  }
+
+  // Si el rol es "medico", muestra la tabla de turnos
   const [turnos, setTurnos] = useState([
     { id: 1, paciente: "Juan Pérez", hora: "09:00 AM", estado: "Pendiente" },
     { id: 2, paciente: "Ana López", hora: "10:00 AM", estado: "Pendiente" },

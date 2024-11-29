@@ -1,8 +1,34 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext";
 
 export default function ProximosTurnosPage() {
+  const { role } = useAuth();
+  const router = useRouter();
+
+  // Lógica de redirección si el rol no es "paciente"
+  useEffect(() => {
+    if (role !== "paciente") {
+      const timer = setTimeout(() => {
+        router.push("/");
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [role, router]);
+
+  if (role !== "paciente") {
+    return (
+      <div className="flex items-center justify-center h-screen bg-bordo">
+        <p className="text-center text-5xl font-bold text-red-600">
+          No tienes permiso para acceder a esta página. Redirigiendo...
+        </p>
+      </div>
+    );
+  }
+
+  // Componente original
   const [turnos, setTurnos] = useState([
     {
       id: 1,

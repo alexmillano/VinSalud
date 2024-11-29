@@ -1,8 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext"; // Asegúrate de que useAuth esté configurado
 
 export default function ContactoPage() {
+  const { role } = useAuth(); // Obtenemos el rol del contexto
+  const router = useRouter();
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
@@ -11,6 +15,29 @@ export default function ContactoPage() {
     mensaje: "",
   });
   const [enviado, setEnviado] = useState(false);
+
+  // Efecto para verificar el rol al cargar la página
+  useEffect(() => {
+    if (role !== "paciente") {
+      // Redirige a "/" después de 4 segundos si el rol no es "medico"
+      const timer = setTimeout(() => {
+        router.push("/");
+      }, 4000);
+
+      // Limpia el temporizador si el componente se desmonta
+      return () => clearTimeout(timer);
+    }
+  }, [role, router]);
+
+  if (role !== "paciente") {
+    return (
+      <div className="flex items-center justify-center h-screen bg-bordo">
+        <p className="text-center text-5xl font-bold text-red-600">
+          No tienes permiso para acceder a esta página. Redirigiendo...
+        </p>
+      </div>
+    );
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,7 +50,13 @@ export default function ContactoPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (formData.nombre && formData.apellido && formData.correo && formData.telefono && formData.mensaje) {
+    if (
+      formData.nombre &&
+      formData.apellido &&
+      formData.correo &&
+      formData.telefono &&
+      formData.mensaje
+    ) {
       setEnviado(true);
     } else {
       alert("Por favor, completa todos los campos.");
