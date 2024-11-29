@@ -7,9 +7,11 @@ export default function Links() {
   const { isLoggedIn, logout, role } = useAuth();
   const router = useRouter();
 
-  const handleLogout = () => {
-    logout();
-    router.push("/");
+  const handleLogout =  async () => {
+    await logout(); 
+    setTimeout(() => {
+      router.push("/");
+    }, 100); 
   };
 
   const routes = isLoggedIn

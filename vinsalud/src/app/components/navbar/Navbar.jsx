@@ -74,7 +74,7 @@ export default function Navbar() {
         </div>
         <div
           className={` bg-teal-950 md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
-            isClick ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+            isClick ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">

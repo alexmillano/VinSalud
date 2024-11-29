@@ -8,27 +8,10 @@ export default function ProximosTurnosPage() {
   const { role } = useAuth();
   const router = useRouter();
 
-  // Lógica de redirección si el rol no es "paciente"
-  useEffect(() => {
-    if (role !== "paciente") {
-      const timer = setTimeout(() => {
-        router.push("/");
-      }, 4000);
-      return () => clearTimeout(timer);
-    }
-  }, [role, router]);
-
-  if (role !== "paciente") {
-    return (
-      <div className="flex items-center justify-center h-screen bg-bordo">
-        <p className="text-center text-5xl font-bold text-red-600">
-          No tienes permiso para acceder a esta página. Redirigiendo...
-        </p>
-      </div>
-    );
-  }
-
-  // Componente original
+  // Estado de carga para asegurarse de que el 'role' está disponible
+  const [loading, setLoading] = useState(true);
+  
+  // Estado de turnos, siempre definido
   const [turnos, setTurnos] = useState([
     {
       id: 1,
@@ -44,8 +27,42 @@ export default function ProximosTurnosPage() {
     },
   ]);
 
+  useEffect(() => {
+    if (role) {
+      setLoading(false); // Cuando el rol se obtiene, cambia el estado de carga
+    }
+  }, [role]);
+
+  // Lógica de redirección si el rol no es "paciente"
+  useEffect(() => {
+    if (role !== "paciente" && !loading) {
+      const timer = setTimeout(() => {
+        router.push("/");
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [role, router, loading]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-bordo">
+        <p className="text-center text-5xl font-bold text-white">Cargando...</p>
+      </div>
+    );
+  }
+
+  if (role !== "paciente") {
+    return (
+      <div className="flex items-center justify-center h-screen bg-bordo">
+        <p className="text-center text-5xl font-bold text-red-600">
+          No tienes permiso para acceder a esta página. Redirigiendo...
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex items-start justify-start h-screen bg-[#1e3a8a]"> {/* Fondo azul específico del Login */}
+    <div className="flex items-start justify-start h-screen bg-[#1e3a8a]">
       <div className="max-w-4xl mx-auto mt-8 px-4 w-full">
         <h2 className="text-3xl font-bold mb-6 text-left text-white">Próximos Turnos</h2>
 
@@ -75,3 +92,4 @@ export default function ProximosTurnosPage() {
     </div>
   );
 }
+

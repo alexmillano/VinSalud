@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../context/AuthContext";
 
@@ -44,7 +44,7 @@ const Historial = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-[#1e3a8a]"> {/* Fondo azul */}
+    <div className="bg-[#1e3a8a] min-h-screen py-8"> {/* Fondo azul, altura mínima de la pantalla */}
       <div className="max-w-4xl mx-auto mt-8 px-4 w-full">
         <h2 className="text-2xl font-bold mb-6 text-center text-white">Historial Médico</h2>
 
