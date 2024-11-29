@@ -1,8 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext"; // Asegúrate de que useAuth esté configurado
 
 export default function ContactoPage() {
+  const { role } = useAuth(); // Obtenemos el rol del contexto
+  const router = useRouter();
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
@@ -11,6 +15,29 @@ export default function ContactoPage() {
     mensaje: "",
   });
   const [enviado, setEnviado] = useState(false);
+
+  // Efecto para verificar el rol al cargar la página
+  useEffect(() => {
+    if (role !== "paciente") {
+      // Redirige a "/" después de 4 segundos si el rol no es "medico"
+      const timer = setTimeout(() => {
+        router.push("/");
+      }, 4000);
+
+      // Limpia el temporizador si el componente se desmonta
+      return () => clearTimeout(timer);
+    }
+  }, [role, router]);
+
+  if (role !== "paciente") {
+    return (
+      <div className="flex items-center justify-center h-screen bg-bordo">
+        <p className="text-center text-5xl font-bold text-red-600">
+          No tienes permiso para acceder a esta página. Redirigiendo...
+        </p>
+      </div>
+    );
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,7 +50,13 @@ export default function ContactoPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (formData.nombre && formData.apellido && formData.correo && formData.telefono && formData.mensaje) {
+    if (
+      formData.nombre &&
+      formData.apellido &&
+      formData.correo &&
+      formData.telefono &&
+      formData.mensaje
+    ) {
       setEnviado(true);
     } else {
       alert("Por favor, completa todos los campos.");
@@ -32,9 +65,11 @@ export default function ContactoPage() {
 
   return (
     <div className="max-w-4xl mx-auto mt-8 px-4">
-      <h2 className="text-2xl font-bold mb-6 text-center">Si tienes alguna duda, por favor comunicate con nosotros</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center">
+        Si tienes alguna duda, por favor comunícate con nosotros
+      </h2>
 
-      {/* Si el formulario fue enviado, mostramos el mensaje de confirmación */}
+      {/* Mostrar el mensaje de confirmación si el formulario fue enviado */}
       {enviado ? (
         <div className="flex flex-col items-center text-green-600">
           <p className="text-lg font-semibold">¡Tu consulta ha sido enviada!</p>
@@ -42,7 +77,9 @@ export default function ContactoPage() {
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="nombre" className="block text-lg font-medium">Nombre</label>
+            <label htmlFor="nombre" className="block text-lg font-medium">
+              Nombre
+            </label>
             <input
               type="text"
               id="nombre"
@@ -53,9 +90,11 @@ export default function ContactoPage() {
               required
             />
           </div>
-          
+
           <div>
-            <label htmlFor="apellido" className="block text-lg font-medium">Apellido</label>
+            <label htmlFor="apellido" className="block text-lg font-medium">
+              Apellido
+            </label>
             <input
               type="text"
               id="apellido"
@@ -68,7 +107,9 @@ export default function ContactoPage() {
           </div>
 
           <div>
-            <label htmlFor="correo" className="block text-lg font-medium">Correo Electrónico</label>
+            <label htmlFor="correo" className="block text-lg font-medium">
+              Correo Electrónico
+            </label>
             <input
               type="email"
               id="correo"
@@ -81,7 +122,9 @@ export default function ContactoPage() {
           </div>
 
           <div>
-            <label htmlFor="telefono" className="block text-lg font-medium">Teléfono</label>
+            <label htmlFor="telefono" className="block text-lg font-medium">
+              Teléfono
+            </label>
             <input
               type="tel"
               id="telefono"
@@ -94,7 +137,9 @@ export default function ContactoPage() {
           </div>
 
           <div>
-            <label htmlFor="mensaje" className="block text-lg font-medium">Mensaje</label>
+            <label htmlFor="mensaje" className="block text-lg font-medium">
+              Mensaje
+            </label>
             <textarea
               id="mensaje"
               name="mensaje"
