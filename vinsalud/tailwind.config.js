@@ -8,13 +8,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        secondary: "#ec0606",
-        darkBg: "#191414",
-      },
-
-      backgroundImage: {
-        "gradient-cover": 
-        "linear-gradient(90deg, rgba(10, 10, 10, 0.9) 0%, rgba(20, 20, 20, 0.9) 50%, rgba(10, 10, 10, 0.9) 100%)",
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        bordo: '#1D2A44', 
+        otroColor: 'rgb(128, 0, 32)', 
+        otroColorHSL: 'hsl(350, 100%, 25%)',
       },
     },
   },
