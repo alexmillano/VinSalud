@@ -8,10 +8,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        secondary: "#ec0606",
+        darkBg: "#191414",
+      },
+
+      backgroundImage: {
+        "gradient-cover": 
+        "linear-gradient(90deg, rgba(10, 10, 10, 0.9) 0%, rgba(20, 20, 20, 0.9) 50%, rgba(10, 10, 10, 0.9) 100%)",
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')
+  ],
+  
 };

@@ -1,21 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "flowbite/dist/flowbite.min.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.carousel-item img {
+  object-fit: contain;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html, body{
+  color: #1D2A44;
+  background: #1D2A44;
+}
+    
+main{
+  background: #1D2A44;
+  height: 100vh;
+  height: 100dvh;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
   }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
 }
